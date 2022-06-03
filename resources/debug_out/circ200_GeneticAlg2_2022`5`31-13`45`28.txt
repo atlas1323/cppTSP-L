@@ -1,0 +1,8 @@
+DataSet:	circ200
+RunTime:	2022-5-31 13:45:28
+Method:	GeneticAlg2
+Params:	P:500 E:300000 SR:0.500000
+DataPath:	./resources/datasets/circ200.txt
+
+################################################################################
+

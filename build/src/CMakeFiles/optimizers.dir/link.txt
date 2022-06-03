@@ -1,0 +1,2 @@
+/usr/bin/ar qc liboptimizers.a CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.o CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o
+/usr/bin/ranlib liboptimizers.a

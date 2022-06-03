@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/src",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/Assist -g -std=gnu++17 -o CMakeFiles/assist.dir/Assist/Benchmarks.cpp.o -c /home/dingo1323/Code/cppTSP/src/Assist/Benchmarks.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/src/Assist/Benchmarks.cpp"
+},
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/src",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/Contender.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/Contender.cpp"
+},
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/src",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.cpp"
+},
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/src",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/Optimizers.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/Optimizers.cpp"
+},
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/app",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/Assist -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/TSP-exe.dir/main.cpp.o -c /home/dingo1323/Code/cppTSP/app/main.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/app/main.cpp"
+}
+]

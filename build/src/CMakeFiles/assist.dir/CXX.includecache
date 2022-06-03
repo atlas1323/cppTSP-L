@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/Assist/Benchmarks.h
+chrono
+-
+
+/home/dingo1323/Code/cppTSP/src/Assist/Benchmarks.cpp
+Benchmarks.h
+-
+chrono
+-
+iostream
+-
+

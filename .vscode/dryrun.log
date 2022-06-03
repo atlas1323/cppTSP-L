@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/dingo1323/Code/cppTSP'
+make: Leaving directory '/home/dingo1323/Code/cppTSP'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

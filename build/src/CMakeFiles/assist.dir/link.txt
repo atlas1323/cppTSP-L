@@ -1,0 +1,2 @@
+/usr/bin/ar qc libassist.a CMakeFiles/assist.dir/Assist/Benchmarks.cpp.o
+/usr/bin/ranlib libassist.a
