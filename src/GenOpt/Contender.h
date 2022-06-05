@@ -5,26 +5,8 @@
 #include <string>
 
 
-struct Point
-{
-	double x;
-	double y;
-
-	Point();
-	Point(double x, double y);
-};
-
-struct City
-{
-	int index;
-	double priority;
-
-	City();
-	City(int index, double priority);
-	bool operator<(const City& that);
-
- 
-};
+#include "City.h"
+#include "Point.h"
 
 class Contender
 {
@@ -46,7 +28,10 @@ public:
 
 	// Overloaded Operators
 	bool operator<(const Contender& that);
+	bool operator>(const Contender& that);
 	Contender& operator=(const Contender& that);
+	Contender& operator=(Contender&& that);
+
 
 	// Documentation Tools
 	std::string PriorityString();
@@ -60,8 +45,6 @@ public:
 	static void Crossover(const Contender& ParentA, const Contender& ParentB, Contender& ChildA, Contender& ChildB);
 	static void Crossover2(const Contender& ParentA, const Contender& ParentB, Contender& ChildA, Contender& ChildB);
 
-
-
 	// Getters and setters
 	static int GetEvalCount();
 	int GetSize();
@@ -70,6 +53,7 @@ public:
 	void CalcFitness();
 	double GetPriority(const int& index)  const;
 	void SetPriority(const int& index, const double& priority);
+	static void ResetEvalCount();
 
 
 	// Debugging

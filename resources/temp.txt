@@ -1,0 +1,626 @@
+#include "Contender.h"
+
+#include <math.h>
+#include <assert.h>
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <random>
+#include <string>
+
+
+Point::Point()
+{
+	this->x = 0;
+	this->y = 0;
+}
+
+Point::Point(double x, double y)
+{
+	this->x = x;
+	this->y = y;
+}
+
+// ################################################################################
+// City Business
+// ################################################################################
+
+/// <summary>
+/// Comparison operator for sorting cities by priority.
+/// </summary>
+/// <param name="that">City to compare to</param>
+/// <returns>priority of THIS city < priority of THAT city</returns>
+bool City::operator<(const City& that)
+{
+	return priority < that.priority;
+}
+
+/// <summary>
+/// Default constructor
+/// </summary>
+City::City()
+{
+	this->index = -1;
+	this->priority = -1.0f;
+}
+
+/// <summary>
+/// Constructor for when supplied index and priority
+/// </summary>
+/// <param name="index"></param>
+/// <param name="priority"></param>
+City::City(int index, double priority)
+{
+	this->index = index;
+	this->priority = priority;
+}
+
+
+// ################################################################################
+// Static member variable initialization (where feasible)
+// ################################################################################
+
+int Contender::evaluations_ = 0;
+
+// define RGN devices
+std::random_device Contender::rand_dev_;
+std::mt19937 Contender::rng_(Contender::rand_dev_());
+std::vector<Point> Contender::Points;
+
+// ################################################################################
+// Constructors and constructor tools
+// ################################################################################
+
+
+Contender::Contender()
+{
+	this->size_ = Points.size();
+	Cities = new City[size_];
+	Indices = new int[size_];
+	for (int i = 0; i < size_; i++)
+		Indices[i] = i;
+
+	// Populate variables
+	GenerateRandomRoute();
+	//CalcFitness(); // Fitness will get calculated in RandomRoute
+}
+
+/// <summary>
+/// Coppy constructor for contender
+/// </summary>
+/// <param name="that">Contender object to be copied</param>
+Contender::Contender(const Contender& that)
+{
+	// std::cout << "copy" << std::endl;
+	this->fitness_ = that.fitness_;
+	this->path_length_ = that.path_length_;
+	if(this->size_ != that.size_)
+	{
+		delete[] this->Indices;
+		delete[] this->Cities;
+	
+		this->size_ = that.size_;
+
+		// allocate
+		// std::cout << "resizing 1" << std::endl;
+		this->Indices = new int[this->size_];
+		this->Cities = new City[this->size_];
+	}
+	// std::copy(this->Cities, this->Cities + this->size_, that.Cities);
+	// std::copy(this->Indices, this->Indices + this->size_, that.Indices);
+	for(int i = 0; i < this->size_; i++)
+	{
+		this->Cities[i] = that.Cities[i];
+		this->Indices[i] = that.Indices[i];
+	}
+
+}
+
+/// <summary>
+/// Move Constructor
+/// </summary>
+/// <param name="that"></param>
+/// <returns></returns>
+Contender::Contender(Contender&& that) noexcept
+{
+
+	/*
+	// originial
+	this->size_ = that.size_;
+	//std::cout << this->path_length_ << " : " << that.path_length_ << std::endl;
+
+	this->fitness_ = that.fitness_;
+	this->path_length_ = that.path_length_;
+	//std::cout << this->path_length_ << " : " << that.path_length_ << std::endl;
+
+	this->Indices = that.Indices;
+	this->Cities = that.Cities;
+
+	that.size_ = 0;
+	that.fitness_ = -1;
+	that.path_length_ = -1;
+	that.Cities = nullptr;
+	that.Indices = nullptr;
+	//std::cout << this->path_length_ << " : " << that.path_length_ << std::endl;
+	// std::cout << "moving\n";
+	*/
+	// std::cout << "moving" << std::endl;
+	this->fitness_ = that.fitness_;
+	this->path_length_ = that.path_length_;
+
+	this->size_ = that.size_;
+
+	// allocate
+	// std::cout << "resizing 1" << std::endl;
+	this->Indices = new int[this->size_];
+	this->Cities = new City[this->size_];
+	
+	// std::copy(this->Cities, this->Cities + this->size_*sizeof(City), that.Cities);
+	// std::copy(this->Indices, this->Indices + this->size_, that.Indices);
+	for(int i = 0; i < this->size_; i++)
+	{
+		this->Cities[i] = that.Cities[i];
+		this->Indices[i] = that.Indices[i];
+	}
+
+
+}
+
+/// <summary>
+/// Cleans up memory allocated on heap
+/// </summary>
+Contender::~Contender()
+{
+
+	delete[] Cities;
+	delete[] Indices;
+}
+
+
+// ################################################################################
+// Overloaded Operators
+// ################################################################################
+
+/// <summary>
+/// Comparison operator for sorting
+/// </summary>
+/// <param name="that">contender to compare this instance to</param>
+/// <returns>Boolean evaluation of this fitness < that fitness</returns>
+bool Contender::operator<(const Contender& that)
+{
+	return this->path_length_ < that.path_length_;
+}
+
+
+/// <summary>
+/// Copy Assignment
+/// </summary>
+/// <param name="that">Instance to copy</param>
+/// <returns></returns>
+Contender& Contender::operator=(const Contender& that)
+{
+	if (this != &that)
+	{
+		// deallocate
+		if (size_ != that.size_)
+		{
+			delete [] Cities;
+			delete [] Indices;
+
+			Cities = nullptr;
+			Indices = nullptr;
+
+			Cities = that.size_ ? new City[that.size_] : nullptr;
+			Indices = that.size_ ? new int[that.size_] : nullptr;
+
+			size_ = that.size_;
+
+		}
+			// std::cout << "resizing 2" << std::endl;
+
+
+		// Populate
+		//memcpy(this->Indices, that.Indices, that.size_ * sizeof(*this->Indices));
+		// for (int i = 0; i < that.size_; i++)
+		// {
+		// 	this->Cities[i] = that.Cities[i];
+		// 	this->Indices[i] = that.Indices[i];
+		// }
+		// std::copy(this->Cities, this->Cities + this->size_, that.Cities);
+		// std::copy(this->Indices, this->Indices + this->size_, that.Indices);
+		// for(int i = 0; i < this->size_; i++)
+		// 	{
+		// 		this->Cities[i] = that.Cities[i];
+		// 		this->Indices[i] = that.Indices[i];
+		// 	}
+		std::copy(that.Cities, that.Cities + size_, this->Cities);
+		std::copy(that.Indices, that.Indices + size_, this->Indices);
+
+		this->fitness_ = that.fitness_;
+		this->path_length_ = that.path_length_;
+	}
+
+	return *this;
+}
+
+Contender& Contender::operator=(Contender&& that)
+{
+	assert(this != &that);
+
+	delete [] this->Cities;
+	delete [] this->Indices;
+
+	this->size_ = that.size_;
+	this->fitness_ = that.fitness_;
+	this->path_length_ = that.path_length_;
+
+	this->Cities = that.Cities;
+	this->Indices = that.Indices;
+
+	that.size_ = 0;
+	that.path_length_ = -1;
+	that.fitness_ = -1;
+	that.Cities = nullptr;
+	that.Indices = nullptr;
+
+	return *this;
+}
+
+// ################################################################################
+// Documentation Tools
+// ################################################################################
+
+std::string Contender::PriorityString()
+{
+	std::string priority_string;
+	for (int i = 0; i < size_; i++)
+	{
+		priority_string += std::to_string(Cities[i].priority);
+		priority_string += " ";
+	}
+
+	return priority_string;
+}
+
+/// <summary>
+/// Creates a string containing the path separated by spaces
+/// </summary>
+/// <returns></returns>
+std::string Contender::RouteString()
+{
+	std::string route_string;
+	for (int i = 0; i < size_; i++)
+	{
+		route_string += std::to_string(Cities[i].index);
+		route_string += " ";
+	}
+
+	return route_string;
+}
+
+/// <summary>
+/// Creates a string for logging evaluation entry
+/// </summary>
+/// <returns></returns>
+std::string Contender::LogString()
+{
+	std::string log_string = std::to_string(evaluations_) + " | " + std::to_string(path_length_) + " | " + RouteString();
+
+	return log_string;
+
+}
+
+
+// ################################################################################
+// Optimization tools
+// ################################################################################
+
+
+
+/// <summary>
+/// Method for filling cities with requisite information. Assumes the cities object has been declared
+/// and memory allocated for city objects
+/// </summary>
+void Contender::GenerateRandomRoute()
+{
+	// Create distribution for random generation
+	std::uniform_real_distribution<double> dist(0.0f, 1.0f);
+
+	//std::uniform_int_distribution<int> dist(0, size_);
+	for (int i = 0; i < size_; i++)
+	{
+		Cities[i] = City(i, dist(rng_));
+	}
+
+	//SortCities();
+	CalcFitness();
+}
+
+/// <summary>
+/// Mutation that randomly swaps genes
+/// </summary>
+void Contender::SwapMutation()
+{
+	// TODO: Mutation by swaping priority of 2 points 
+	// Swaps index/indices to prevent
+
+	std::uniform_int_distribution<int> dist(0, size_);
+	int index1 = dist(rng_);
+	int index2 = index1;
+	while (index2 == index1)
+	{
+		index2 = dist(rng_);
+	}
+	
+	double temp = Cities[index1].priority;
+	Cities[index1].priority = Cities[index2].priority;
+	Cities[index2].priority = temp;
+}
+
+/// <summary>
+/// Mutation for priority list to increment or decrement its value. Each locus has a 
+/// chance of mutation equal to the user define rate. It will then be incremented or decremented
+/// by one to mutate it's order. 
+/// </summary>
+/// <param name="rate">Mutation rate</param>
+void Contender::PriorityMut(const double& rate)
+{
+	std::uniform_real_distribution<double> dist(0.0f, 100.0f);
+	for (int i = 0; i < size_; i++)
+	{
+		if (dist(rng_) < rate)
+		{
+			int p = GetPriority(i);
+			if (dist(rng_) < 50.0f)
+				p++;
+			else
+				p--;
+			SetPriority(i, p);
+		}
+	}
+
+	SortCities();
+}
+
+
+/// <summary>
+/// Crossover between ParentA and ParentB applied to ChildA and ChildB
+/// </summary>
+/// <param name="ParentA"></param>
+/// <param name="ParentB"></param>
+/// <param name="ChildA"></param>
+/// <param name="ChildB"></param>
+void Contender::Crossover(const Contender& ParentA, const Contender& ParentB, Contender& ChildA, Contender& ChildB)
+{
+	int size_ = ParentA.size_;
+
+	// Generate crossover points
+	std::uniform_int_distribution<int> dist(0, size_);
+	int cross_point_a = dist(rng_);
+	int cross_point_b = dist(rng_);
+
+	bool flip = false;
+
+	// iterate through points and create 2 crossover children
+	for (int i = 0; i < size_; i++)
+	{
+		if (i == cross_point_a || i == cross_point_b)
+			flip = !flip;
+
+		//std::cout << flip << " ##############################################" << std::endl;
+		//std::cout << ParentA.GetPriority(i) << " : " << ParentB.GetPriority(i) << " : " << ChildA.GetPriority(i) << " : " << ChildB.GetPriority(i) << std::endl;
+
+		if (flip)
+		{
+			ChildA.SetPriority(i, ParentA.GetPriority(i));
+			ChildB.SetPriority(i, ParentB.GetPriority(i));
+		}
+
+		else
+		{
+			ChildA.SetPriority(i, ParentB.GetPriority(i));
+			ChildB.SetPriority(i, ParentA.GetPriority(i));
+
+		}
+		//std::cout << ParentA.GetPriority(i) << " : " << ParentB.GetPriority(i) << " : " << ChildA.GetPriority(i) << " : " << ChildB.GetPriority(i) << std::endl;
+
+	}
+
+	ChildA.CalcFitness();
+	ChildB.CalcFitness();
+
+	if (ChildA.GetPathLength() == ParentA.GetPathLength() || ChildA.GetPathLength() == ParentB.GetPathLength())
+	{
+		ChildA.SwapMutation();
+		ChildA.CalcFitness();
+	}
+	if (ChildB.GetPathLength() == ParentA.GetPathLength() || ChildB.GetPathLength() == ParentB.GetPathLength())
+	{
+		ChildB.SwapMutation();
+		ChildB.CalcFitness();
+	}
+
+	//for(int i = 0; i < )
+}
+
+
+/// <summary>
+/// Like crossover, but not realligning the points
+/// </summary>
+/// <param name="ParentA"></param>
+/// <param name="ParentB"></param>
+/// <param name="ChildA"></param>
+/// <param name="ChildB"></param>
+void Contender::Crossover2(const Contender& ParentA, const Contender& ParentB, Contender& ChildA, Contender& ChildB)
+{
+	int size_ = ParentA.size_;
+
+	// Generate crossover points
+	std::uniform_int_distribution<int> dist(0, size_);
+	int cross_point_a = dist(rng_);
+	int cross_point_b = dist(rng_);
+
+	bool flip = false;
+
+	// iterate through points and create 2 crossover children
+	for (int i = 0; i < size_; i++)
+	{
+		if (i == cross_point_a || i == cross_point_b)
+			flip = !flip;
+
+		//std::cout << flip << " ##############################################" << std::endl;
+		//std::cout << ParentA.GetPriority(i) << " : " << ParentB.GetPriority(i) << " : " << ChildA.GetPriority(i) << " : " << ChildB.GetPriority(i) << std::endl;
+
+		if (flip)
+		{
+
+			ChildA.Cities[i].priority = ParentA.Cities[i].priority;
+			ChildB.Cities[i].priority = ParentB.Cities[i].priority;
+
+		}
+
+		else
+		{
+			ChildA.Cities[i].priority = ParentB.Cities[i].priority;
+			ChildB.Cities[i].priority = ParentA.Cities[i].priority;
+
+		}
+		//std::cout << ParentA.GetPriority(i) << " : " << ParentB.GetPriority(i) << " : " << ChildA.GetPriority(i) << " : " << ChildB.GetPriority(i) << std::endl;
+
+	}
+
+	ChildA.CalcFitness();
+	ChildB.CalcFitness();
+
+	if (ChildA.GetPathLength() == ParentA.GetPathLength() || ChildA.GetPathLength() == ParentB.GetPathLength())
+	{
+		ChildA.SwapMutation();
+		ChildA.CalcFitness();
+	}
+	if (ChildB.GetPathLength() == ParentA.GetPathLength() || ChildB.GetPathLength() == ParentB.GetPathLength())
+	{
+		ChildB.SwapMutation();
+		ChildB.CalcFitness();
+	}
+}
+
+
+
+// ################################################################################
+// Getters and setters
+// ################################################################################
+
+int Contender::GetEvalCount()
+{
+	return evaluations_;
+}
+
+int Contender::GetSize()
+{
+	return this->size_;
+}
+
+/// <summary>
+/// Calculates total path length as a measure of fitness for the path.
+/// (will use 1 - fit/total for actual fitness metric)
+/// Updates fitness_ member variable when done
+/// </summary>
+void Contender::CalcFitness()
+{
+	evaluations_++;
+	this->SortCities();
+	double path_length = 0.0f;
+
+	for (int i = 1; i < size_; i++)
+	{
+		path_length += EucDist(Points[Cities[i].index], Points[Cities[i - 1].index]);
+	}
+
+	this->fitness_ = 1.0f/path_length;
+	this->path_length_ = path_length;
+}
+
+double Contender::GetPathLength() const
+{
+	return path_length_;
+}
+
+double Contender::GetFitness() const
+{
+	return fitness_;
+}
+
+
+/// <summary>
+/// Quick function to get the priority at a given city index
+/// </summary>
+/// <param name="index">index desired</param>
+/// <returns></returns>
+double Contender::GetPriority(const int& index) const
+{
+	// std::cout << Indices[index] << std::endl;
+	return Cities[Indices[index]].priority;
+}
+
+
+/// <summary>
+/// Basically alias to quickly set priority at a specific index
+/// </summary>
+/// <param name="index"></param>
+/// <param name="priority"></param>
+void Contender::SetPriority(const int& index, const double& priority)
+{
+	Cities[Indices[index]].priority = priority;
+}
+
+// ################################################################################
+// Debugging Methods
+// ################################################################################
+
+
+
+// ################################################################################
+// Private Methods
+// ################################################################################
+
+/// <summary>
+/// Calculates the euclidean distance between two Point objects
+/// </summary>
+/// <param name="a">First point</param>
+/// <param name="b">Second point</param>
+/// <returns></returns>
+double Contender::EucDist(const Point& a, const Point& b)
+{
+	// Euclidean Distance formula
+	double distance = sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
+	return distance;
+}
+
+/// <summary>
+/// Updates the indices list for reverse mapping needed in crossover.
+/// Reduces need for "sorting" lists repeatedly on index vs priority and runs in O(n) time
+/// </summary>
+void Contender::UpdateIndices()
+{
+	for (int i = 0; i < size_; i++)
+	{
+		Indices[Cities[i].index] = i;
+	}
+}
+
+
+/// <summary>
+/// Sorts the cities and updates the indices, as the cities should never change order without
+/// updating indices anyway.
+/// </summary>
+void Contender::SortCities()
+{
+	std::sort(Cities, Cities + size_);
+	for (int i = 0; i < size_; i++)
+	{
+		double p = 0.0f + i;
+		Cities[i].priority = p;
+	}
+	UpdateIndices();
+}

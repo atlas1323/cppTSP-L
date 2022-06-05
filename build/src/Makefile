@@ -168,6 +168,54 @@ Assist/Benchmarks.cpp.s:
 	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/assist.dir/build.make src/CMakeFiles/assist.dir/Assist/Benchmarks.cpp.s
 .PHONY : Assist/Benchmarks.cpp.s
 
+GenOpt/Candidate.o: GenOpt/Candidate.cpp.o
+.PHONY : GenOpt/Candidate.o
+
+# target to build an object file
+GenOpt/Candidate.cpp.o:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o
+.PHONY : GenOpt/Candidate.cpp.o
+
+GenOpt/Candidate.i: GenOpt/Candidate.cpp.i
+.PHONY : GenOpt/Candidate.i
+
+# target to preprocess a source file
+GenOpt/Candidate.cpp.i:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.i
+.PHONY : GenOpt/Candidate.cpp.i
+
+GenOpt/Candidate.s: GenOpt/Candidate.cpp.s
+.PHONY : GenOpt/Candidate.s
+
+# target to generate assembly for a file
+GenOpt/Candidate.cpp.s:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.s
+.PHONY : GenOpt/Candidate.cpp.s
+
+GenOpt/City.o: GenOpt/City.cpp.o
+.PHONY : GenOpt/City.o
+
+# target to build an object file
+GenOpt/City.cpp.o:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o
+.PHONY : GenOpt/City.cpp.o
+
+GenOpt/City.i: GenOpt/City.cpp.i
+.PHONY : GenOpt/City.i
+
+# target to preprocess a source file
+GenOpt/City.cpp.i:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.i
+.PHONY : GenOpt/City.cpp.i
+
+GenOpt/City.s: GenOpt/City.cpp.s
+.PHONY : GenOpt/City.s
+
+# target to generate assembly for a file
+GenOpt/City.cpp.s:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.s
+.PHONY : GenOpt/City.cpp.s
+
 GenOpt/Contender.o: GenOpt/Contender.cpp.o
 .PHONY : GenOpt/Contender.o
 
@@ -240,6 +288,30 @@ GenOpt/Optimizers.cpp.s:
 	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.s
 .PHONY : GenOpt/Optimizers.cpp.s
 
+GenOpt/Point.o: GenOpt/Point.cpp.o
+.PHONY : GenOpt/Point.o
+
+# target to build an object file
+GenOpt/Point.cpp.o:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o
+.PHONY : GenOpt/Point.cpp.o
+
+GenOpt/Point.i: GenOpt/Point.cpp.i
+.PHONY : GenOpt/Point.i
+
+# target to preprocess a source file
+GenOpt/Point.cpp.i:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.i
+.PHONY : GenOpt/Point.cpp.i
+
+GenOpt/Point.s: GenOpt/Point.cpp.s
+.PHONY : GenOpt/Point.s
+
+# target to generate assembly for a file
+GenOpt/Point.cpp.s:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.s
+.PHONY : GenOpt/Point.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -253,6 +325,12 @@ help:
 	@echo "... Assist/Benchmarks.o"
 	@echo "... Assist/Benchmarks.i"
 	@echo "... Assist/Benchmarks.s"
+	@echo "... GenOpt/Candidate.o"
+	@echo "... GenOpt/Candidate.i"
+	@echo "... GenOpt/Candidate.s"
+	@echo "... GenOpt/City.o"
+	@echo "... GenOpt/City.i"
+	@echo "... GenOpt/City.s"
 	@echo "... GenOpt/Contender.o"
 	@echo "... GenOpt/Contender.i"
 	@echo "... GenOpt/Contender.s"
@@ -262,6 +340,9 @@ help:
 	@echo "... GenOpt/Optimizers.o"
 	@echo "... GenOpt/Optimizers.i"
 	@echo "... GenOpt/Optimizers.s"
+	@echo "... GenOpt/Point.o"
+	@echo "... GenOpt/Point.i"
+	@echo "... GenOpt/Point.s"
 .PHONY : help
 
 

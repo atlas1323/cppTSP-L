@@ -45,10 +45,22 @@ int main(int argc, char *argv[])
 	//DataLog logger = DataLog(dPath, oPath, "GeneticAlg", "");
 	//Optimizers::BasicGA(1000, 300'000, dPath, 0.5f, logger);
 
+
+	int num_runs = 300'000;
+
 	//Optimizers::RandomSearch(3'000'000, dPath, oPath);
-	// Optimizers::BasicGA4(1000, 3'000'000, 0.5f, 24.0f, dPath, oPath);
-	// Optimizers::BasicGA2(500, 300'000, 0.5f, dPath, oPath);
-	Optimizers::BasicGA3(1000, 300'000, 0.5f, dPath, oPath);
+	// Optimizers::BasicGA4(1000, num_runs, 0.5f, 24.0f, dPath, oPath);
+	// std::cout << "Continue?";
+	// std::cin.get();
+	
+	// Optimizers::BasicGA2(1000, num_runs, 0.5f, dPath, oPath);
+	// std::cout << "Continue?";
+	// std::cin.get();
+	// Optimizers::RandomSearch(300'000, dPath, oPath);
+	Optimizers::BasicGA3(1000, num_runs, 0.5f, dPath, oPath);
+	// std::cout << "Continue?";
+	// std::cin.get();
+	// Optimizers::RMHC(1000, num_runs, dPath, oPath);
 
 
 	/*DataLog logger = DataLog(dPath, oPath, "RMHC", "P500");
@@ -59,6 +71,6 @@ int main(int argc, char *argv[])
 	//Optimizers::BasicGA3(1000, 3'000'000, 0.5f, logger);
 
 	//Optimizers::BasicGA4(1000, 3'000'000, 0.5f, 10.0f, dPath, oPath);
-
+	std::cout << "here" << std::endl;
 	return 0;
 }

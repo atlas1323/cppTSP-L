@@ -7,3 +7,6 @@
 /home/dingo1323/Code/cppTSP/build/app/CMakeFiles/TSP-exe.dir
 /home/dingo1323/Code/cppTSP/build/app/CMakeFiles/edit_cache.dir
 /home/dingo1323/Code/cppTSP/build/app/CMakeFiles/rebuild_cache.dir
+/home/dingo1323/Code/cppTSP/build/sandbox/CMakeFiles/sandbox-exe.dir
+/home/dingo1323/Code/cppTSP/build/sandbox/CMakeFiles/edit_cache.dir
+/home/dingo1323/Code/cppTSP/build/sandbox/CMakeFiles/rebuild_cache.dir

@@ -65,16 +65,19 @@ CMAKE_BINARY_DIR = /home/dingo1323/Code/cppTSP/build
 # The main recursive "all" target.
 all: src/all
 all: app/all
+all: sandbox/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: src/preinstall
 preinstall: app/preinstall
+preinstall: sandbox/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: src/clean
 clean: app/clean
+clean: sandbox/clean
 .PHONY : clean
 
 #=============================================================================
@@ -91,6 +94,21 @@ app/preinstall:
 # Recursive "clean" directory target.
 app/clean: app/CMakeFiles/TSP-exe.dir/clean
 .PHONY : app/clean
+
+#=============================================================================
+# Directory level rules for directory sandbox
+
+# Recursive "all" directory target.
+sandbox/all: sandbox/CMakeFiles/sandbox-exe.dir/all
+.PHONY : sandbox/all
+
+# Recursive "preinstall" directory target.
+sandbox/preinstall:
+.PHONY : sandbox/preinstall
+
+# Recursive "clean" directory target.
+sandbox/clean: sandbox/CMakeFiles/sandbox-exe.dir/clean
+.PHONY : sandbox/clean
 
 #=============================================================================
 # Directory level rules for directory src
@@ -142,12 +160,12 @@ src/CMakeFiles/assist.dir/clean:
 src/CMakeFiles/optimizers.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/optimizers.dir/build.make src/CMakeFiles/optimizers.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=5,6,7,8 "Built target optimizers"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=5,6,7,8,9,10,11 "Built target optimizers"
 .PHONY : src/CMakeFiles/optimizers.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/optimizers.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/optimizers.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/optimizers.dir/rule
@@ -174,7 +192,7 @@ app/CMakeFiles/TSP-exe.dir/all: src/CMakeFiles/optimizers.dir/all
 
 # Build rule for subdir invocation for target.
 app/CMakeFiles/TSP-exe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app/CMakeFiles/TSP-exe.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 0
 .PHONY : app/CMakeFiles/TSP-exe.dir/rule
@@ -187,6 +205,33 @@ TSP-exe: app/CMakeFiles/TSP-exe.dir/rule
 app/CMakeFiles/TSP-exe.dir/clean:
 	$(MAKE) $(MAKESILENT) -f app/CMakeFiles/TSP-exe.dir/build.make app/CMakeFiles/TSP-exe.dir/clean
 .PHONY : app/CMakeFiles/TSP-exe.dir/clean
+
+#=============================================================================
+# Target rules for target sandbox/CMakeFiles/sandbox-exe.dir
+
+# All Build rule for target.
+sandbox/CMakeFiles/sandbox-exe.dir/all: src/CMakeFiles/assist.dir/all
+sandbox/CMakeFiles/sandbox-exe.dir/all: src/CMakeFiles/optimizers.dir/all
+	$(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/depend
+	$(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=12,13 "Built target sandbox-exe"
+.PHONY : sandbox/CMakeFiles/sandbox-exe.dir/all
+
+# Build rule for subdir invocation for target.
+sandbox/CMakeFiles/sandbox-exe.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 11
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sandbox/CMakeFiles/sandbox-exe.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dingo1323/Code/cppTSP/build/CMakeFiles 0
+.PHONY : sandbox/CMakeFiles/sandbox-exe.dir/rule
+
+# Convenience name for target.
+sandbox-exe: sandbox/CMakeFiles/sandbox-exe.dir/rule
+.PHONY : sandbox-exe
+
+# clean rule for target.
+sandbox/CMakeFiles/sandbox-exe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/clean
+.PHONY : sandbox/CMakeFiles/sandbox-exe.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

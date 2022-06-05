@@ -11,6 +11,11 @@
 },
 {
   "directory": "/home/dingo1323/Code/cppTSP/build/src",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/Candidate.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/Candidate.cpp"
+},
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/src",
   "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.cpp",
   "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.cpp"
 },
@@ -20,8 +25,23 @@
   "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/Optimizers.cpp"
 },
 {
+  "directory": "/home/dingo1323/Code/cppTSP/build/src",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/Point.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/Point.cpp"
+},
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/src",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/optimizers.dir/GenOpt/City.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/City.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/src/GenOpt/City.cpp"
+},
+{
   "directory": "/home/dingo1323/Code/cppTSP/build/app",
   "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/Assist -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/TSP-exe.dir/main.cpp.o -c /home/dingo1323/Code/cppTSP/app/main.cpp",
   "file": "/home/dingo1323/Code/cppTSP/app/main.cpp"
+},
+{
+  "directory": "/home/dingo1323/Code/cppTSP/build/sandbox",
+  "command": "/usr/bin/g++  -I/home/dingo1323/Code/cppTSP/src/Assist -I/home/dingo1323/Code/cppTSP/src/GenOpt -g -std=gnu++17 -o CMakeFiles/sandbox-exe.dir/main.cpp.o -c /home/dingo1323/Code/cppTSP/sandbox/main.cpp",
+  "file": "/home/dingo1323/Code/cppTSP/sandbox/main.cpp"
 }
 ]

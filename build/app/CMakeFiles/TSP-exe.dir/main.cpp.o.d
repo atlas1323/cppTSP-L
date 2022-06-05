@@ -211,4 +211,6 @@ app/CMakeFiles/TSP-exe.dir/main.cpp.o: \
  /home/dingo1323/Code/cppTSP/src/Assist/Benchmarks.h \
  /home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.h \
  /home/dingo1323/Code/cppTSP/src/GenOpt/Contender.h \
+ /home/dingo1323/Code/cppTSP/src/GenOpt/City.h \
+ /home/dingo1323/Code/cppTSP/src/GenOpt/Point.h \
  /home/dingo1323/Code/cppTSP/src/GenOpt/Optimizers.h

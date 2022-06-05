@@ -1,7 +1,8 @@
-#include <Optimizers.h>
+#include "Optimizers.h"
 
-#include <Contender.h>
-#include <DataLog.h>
+#include "Contender.h"
+#include "Candidate.h"
+#include "DataLog.h"
 
 #include <random>
 #include <vector>
@@ -98,7 +99,8 @@ namespace Optimizers
 			}
 		}
 
-
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
 	}
 
 	void BasicGA2(int pop_size, int num_evals, double survival_rate, std::string dPath, std::string oPath)
@@ -213,6 +215,8 @@ namespace Optimizers
 		}
 
 		std::cout << "################################################################################\n\n\n";
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
 	}
 
 	void BasicGA3(int pop_size, int num_evals, double survival_rate, std::string dPath, std::string oPath)
@@ -235,20 +239,20 @@ namespace Optimizers
 		for (int i = 0; i < pop_size; i++)
 			population.push_back(Contender());
 
-		for (int i = 0; i < pop_size; i++)
-			std::cout << population[i].GetPathLength() << " ";
-		std::cout << std::endl;
+		// for (int i = 0; i < pop_size; i++)
+		// 	std::cout << population[i].GetPathLength() << " ";
+		// std::cout << std::endl;
 
-		//std::cout << "sorting\n\n";
+		std::cout << "sorting\n\n";
 
 		// Sort starting popultion by fitness and find best fitness
 		std::sort(population.begin(), population.end());
 		best_fitness = population[0].GetPathLength();
 		logger.LogEntry(population[0].LogString());
 
-		for (int i = 0; i < pop_size; i++)
-			std::cout << population[i].GetPathLength() << " ";
-		std::cout << std::endl;
+		// for (int i = 0; i < pop_size; i++)
+		// 	std::cout << population[i].GetPathLength() << " ";
+		// std::cout << std::endl;
 		// TODO: Log Data
 
 		// main evolution loop
@@ -287,7 +291,7 @@ namespace Optimizers
 			}
 		}
 
-		std::cout << "\n\n\n################################################################################";
+		std::cout << "\n\n\n################################################################################\n";
 
 
 		for (Contender member : population)
@@ -295,7 +299,17 @@ namespace Optimizers
 			std::cout << member.GetPathLength() << " ";
 		}
 
+		// for (int i = 0; i < pop_size; i++)
+		// {
+		// 	std::cout << "\n" << i << "---" << population[i].GetPathLength() << "\n";
+		// 	std::cout << population[i].RouteString() << std::endl;
+		// }
+		std::cout << std::endl;
+
 		std::cout << "################################################################################\n\n\n";
+
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
 	}
 
 	void BasicGA4(int pop_size, int num_evals, double survival_rate, double restart_rate, std::string dPath, std::string oPath)
@@ -398,34 +412,15 @@ namespace Optimizers
 
 		std::cout << "################################################################################\n\n\n";
 		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
 	}
 
-	
 
-	// void SolEvolver(std::vector<Solution>& population, std::vector<Point> data)
-	// {
-	// 	int evals = 0;
-	// 	double totFitness = 0.0f;
-		
-	// 	// Evaluate fitness of population and sum for proportional selection
-	// 	for (Solution sol : population)
-	// 	{
-	// 		sol.m_fitness = Solution::PathLength(sol.m_path, sol.m_size, data);
-	// 		evals++;
-	// 		totFitness += sol.m_fitness;
-	// 	}
-
-	// 	// sort the population by fitness
-	// 	Solution::SortByFitness(population);
-
-	// 	// generation loop
-	// 	// TODO: Proportional select 2 items to crossover
-
-	// }
-
-
-	void RMHC(int pop_size, int num_evals, DataLog logger)
+	void RMHC(int pop_size, int num_evals, std::string dPath, std::string oPath)
 	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals);
+		DataLog logger = DataLog(dPath, oPath, "RMHC", params);
+
 		std::cout << "Beggining trial" << std::endl;
 		// Define tracking variables
 		int best_fitness = 0;
@@ -438,22 +433,24 @@ namespace Optimizers
 		for (int i = 0; i < pop_size; i++)
 		{
 			population.push_back(Contender());
-			if (population[i].GetPathLength() < best_fitness)
+			if (population[i] < population[best_fitness] || i == best_fitness)
 			{
-				best_fitness = population[i].GetPathLength();
-				if (population[i] < population[best_fitness])
-					best_fitness = i;
+
+				best_fitness = i;
+				logger.LogEntry(population[best_fitness].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
 			}
 		}
 		
 
-		logger.LogEntry(population[best_fitness].LogString());
-		std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
+		// logger.LogEntry(population[best_fitness].LogString());
+		// std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
 
-
+		std::cout << "starting opt loop" << std::endl;
 		// Begin optimization loop
 		while (Contender::GetEvalCount() < num_evals)
 		{
+			std::cout << Contender::GetEvalCount() << std::endl;
 			for (int i = 0; i < pop_size; i++)
 			{
 				Contender temp = Contender(population[i]);
@@ -462,7 +459,7 @@ namespace Optimizers
 				if (temp < population[i])
 				{
 					population[i] = temp;
-					if (population[i] < population[best_fitness])
+					if (population[i] < population[best_fitness] || i == best_fitness)
 					{
 						best_fitness = i;
 						logger.LogEntry(population[best_fitness].LogString());
@@ -473,6 +470,7 @@ namespace Optimizers
 			}
 		}
 		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
 	}
 
 	void RandomSearch(int num_evals, std::string dPath, std::string oPath)
@@ -500,6 +498,9 @@ namespace Optimizers
 				std::cout << Contender::GetEvalCount() << " : " << best_fitness.GetPathLength() << std::endl;
 			}
 		}
+
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
 	}
 }
 

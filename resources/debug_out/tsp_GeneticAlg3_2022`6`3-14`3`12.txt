@@ -1,0 +1,8 @@
+DataSet:	tsp
+RunTime:	2022-6-3 14:3:12
+Method:	GeneticAlg3
+Params:	P:1000 E:300000 SR:0.500000
+DataPath:	./resources/datasets/tsp.txt
+
+################################################################################
+

@@ -1,0 +1,1 @@
+/usr/bin/g++ -g "CMakeFiles/sandbox-exe.dir/main.cpp.o" -o sandbox-exe  ../src/libassist.a ../src/liboptimizers.a 

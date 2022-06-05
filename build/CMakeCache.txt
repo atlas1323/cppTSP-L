@@ -232,6 +232,15 @@ cppTSP_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 cppTSP_SOURCE_DIR:STATIC=/home/dingo1323/Code/cppTSP
 
+//Value Computed by CMake
+sandbox_BINARY_DIR:STATIC=/home/dingo1323/Code/cppTSP/build/sandbox
+
+//Value Computed by CMake
+sandbox_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+sandbox_SOURCE_DIR:STATIC=/home/dingo1323/Code/cppTSP/sandbox
+
 
 ########################
 # INTERNAL cache entries
@@ -339,7 +348,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

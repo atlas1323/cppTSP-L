@@ -83,10 +83,24 @@ src/CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.s"
 	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingo1323/Code/cppTSP/src/GenOpt/Contender.cpp -o CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.s
 
+src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o: src/CMakeFiles/optimizers.dir/flags.make
+src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o: ../src/GenOpt/Candidate.cpp
+src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o: src/CMakeFiles/optimizers.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o -MF CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o.d -o CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/Candidate.cpp
+
+src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.i"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dingo1323/Code/cppTSP/src/GenOpt/Candidate.cpp > CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.i
+
+src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.s"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingo1323/Code/cppTSP/src/GenOpt/Candidate.cpp -o CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.s
+
 src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o: src/CMakeFiles/optimizers.dir/flags.make
 src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o: ../src/GenOpt/DataLog.cpp
 src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o: src/CMakeFiles/optimizers.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o"
 	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o -MF CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o.d -o CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.cpp
 
 src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.i: cmake_force
@@ -100,7 +114,7 @@ src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.s: cmake_force
 src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o: src/CMakeFiles/optimizers.dir/flags.make
 src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o: ../src/GenOpt/Optimizers.cpp
 src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o: src/CMakeFiles/optimizers.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o"
 	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o -MF CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o.d -o CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/Optimizers.cpp
 
 src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.i: cmake_force
@@ -111,21 +125,55 @@ src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.s"
 	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingo1323/Code/cppTSP/src/GenOpt/Optimizers.cpp -o CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.s
 
+src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o: src/CMakeFiles/optimizers.dir/flags.make
+src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o: ../src/GenOpt/Point.cpp
+src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o: src/CMakeFiles/optimizers.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o -MF CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o.d -o CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/Point.cpp
+
+src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/optimizers.dir/GenOpt/Point.cpp.i"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dingo1323/Code/cppTSP/src/GenOpt/Point.cpp > CMakeFiles/optimizers.dir/GenOpt/Point.cpp.i
+
+src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optimizers.dir/GenOpt/Point.cpp.s"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingo1323/Code/cppTSP/src/GenOpt/Point.cpp -o CMakeFiles/optimizers.dir/GenOpt/Point.cpp.s
+
+src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o: src/CMakeFiles/optimizers.dir/flags.make
+src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o: ../src/GenOpt/City.cpp
+src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o: src/CMakeFiles/optimizers.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o -MF CMakeFiles/optimizers.dir/GenOpt/City.cpp.o.d -o CMakeFiles/optimizers.dir/GenOpt/City.cpp.o -c /home/dingo1323/Code/cppTSP/src/GenOpt/City.cpp
+
+src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/optimizers.dir/GenOpt/City.cpp.i"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dingo1323/Code/cppTSP/src/GenOpt/City.cpp > CMakeFiles/optimizers.dir/GenOpt/City.cpp.i
+
+src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optimizers.dir/GenOpt/City.cpp.s"
+	cd /home/dingo1323/Code/cppTSP/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingo1323/Code/cppTSP/src/GenOpt/City.cpp -o CMakeFiles/optimizers.dir/GenOpt/City.cpp.s
+
 # Object files for target optimizers
 optimizers_OBJECTS = \
 "CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.o" \
+"CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o" \
 "CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o" \
-"CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o"
+"CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o" \
+"CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o" \
+"CMakeFiles/optimizers.dir/GenOpt/City.cpp.o"
 
 # External object files for target optimizers
 optimizers_EXTERNAL_OBJECTS =
 
 src/liboptimizers.a: src/CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.o
+src/liboptimizers.a: src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o
 src/liboptimizers.a: src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o
 src/liboptimizers.a: src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o
+src/liboptimizers.a: src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o
+src/liboptimizers.a: src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o
 src/liboptimizers.a: src/CMakeFiles/optimizers.dir/build.make
 src/liboptimizers.a: src/CMakeFiles/optimizers.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library liboptimizers.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library liboptimizers.a"
 	cd /home/dingo1323/Code/cppTSP/build/src && $(CMAKE_COMMAND) -P CMakeFiles/optimizers.dir/cmake_clean_target.cmake
 	cd /home/dingo1323/Code/cppTSP/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/optimizers.dir/link.txt --verbose=$(VERBOSE)
 

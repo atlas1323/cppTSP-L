@@ -12,6 +12,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.23.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.23.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.23.1/CMakeSystem.cmake"
+  "../sandbox/CMakeLists.txt"
   "../src/CMakeLists.txt"
   "/usr/local/share/cmake-3.23/Modules/CMakeCInformation.cmake"
   "/usr/local/share/cmake-3.23/Modules/CMakeCXXInformation.cmake"
@@ -43,6 +44,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   "app/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "sandbox/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -50,4 +52,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "src/CMakeFiles/assist.dir/DependInfo.cmake"
   "src/CMakeFiles/optimizers.dir/DependInfo.cmake"
   "app/CMakeFiles/TSP-exe.dir/DependInfo.cmake"
+  "sandbox/CMakeFiles/sandbox-exe.dir/DependInfo.cmake"
   )

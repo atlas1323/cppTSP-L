@@ -155,6 +155,19 @@ TSP-exe/fast:
 	$(MAKE) $(MAKESILENT) -f app/CMakeFiles/TSP-exe.dir/build.make app/CMakeFiles/TSP-exe.dir/build
 .PHONY : TSP-exe/fast
 
+#=============================================================================
+# Target rules for targets named sandbox-exe
+
+# Build rule for target.
+sandbox-exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sandbox-exe
+.PHONY : sandbox-exe
+
+# fast build rule for target.
+sandbox-exe/fast:
+	$(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/build
+.PHONY : sandbox-exe/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -166,6 +179,7 @@ help:
 	@echo "... TSP-exe"
 	@echo "... assist"
 	@echo "... optimizers"
+	@echo "... sandbox-exe"
 .PHONY : help
 
 

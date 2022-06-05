@@ -9,7 +9,8 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						3
 					],
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
@@ -49,6 +50,21 @@
 					[
 						0
 					]
+				},
+				{
+					"build" : "sandbox",
+					"jsonFile" : "directory-sandbox-Debug-08dc3d2aa00caa677077.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "sandbox",
+					"targetIndexes" : 
+					[
+						3
+					]
 				}
 			],
 			"name" : "Debug",
@@ -59,14 +75,16 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					],
 					"name" : "cppTSP",
 					"targetIndexes" : 
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -89,8 +107,15 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "optimizers::@145eef247bfb46b6828c",
-					"jsonFile" : "target-optimizers-Debug-9e0bf60aab125e8da601.json",
+					"jsonFile" : "target-optimizers-Debug-81a132a47f9818cc45b0.json",
 					"name" : "optimizers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "sandbox-exe::@e49c0a52b1bf699b6c68",
+					"jsonFile" : "target-sandbox-exe-Debug-3623ca0b6eb183093443.json",
+					"name" : "sandbox-exe",
 					"projectIndex" : 0
 				}
 			]

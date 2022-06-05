@@ -1,6 +1,9 @@
 #include "Contender.h"
+#include "Point.h"
+#include "City.h"
 
 #include <math.h>
+#include <assert.h>
 
 #include <iostream>
 #include <algorithm>
@@ -8,52 +11,6 @@
 #include <random>
 #include <string>
 
-
-Point::Point()
-{
-	this->x = 0;
-	this->y = 0;
-}
-
-Point::Point(double x, double y)
-{
-	this->x = x;
-	this->y = y;
-}
-
-// ################################################################################
-// City Business
-// ################################################################################
-
-/// <summary>
-/// Comparison operator for sorting cities by priority.
-/// </summary>
-/// <param name="that">City to compare to</param>
-/// <returns>priority of THIS city < priority of THAT city</returns>
-bool City::operator<(const City& that)
-{
-	return priority < that.priority;
-}
-
-/// <summary>
-/// Default constructor
-/// </summary>
-City::City()
-{
-	this->index = -1;
-	this->priority = -1.0f;
-}
-
-/// <summary>
-/// Constructor for when supplied index and priority
-/// </summary>
-/// <param name="index"></param>
-/// <param name="priority"></param>
-City::City(int index, double priority)
-{
-	this->index = index;
-	this->priority = priority;
-}
 
 
 // ################################################################################
@@ -86,84 +43,48 @@ Contender::Contender()
 }
 
 /// <summary>
-/// Coppy constructor for contender
+/// Copy constructor for contender
 /// </summary>
 /// <param name="that">Contender object to be copied</param>
 Contender::Contender(const Contender& that)
+	:	fitness_{ that.fitness_},
+		path_length_{that.path_length_},
+		size_{that.size_},
+		Indices{new int[that.size_]},
+		Cities{new City[that.size_]}
 {
-	this->fitness_ = that.fitness_;
-	this->path_length_ = that.path_length_;
-	if(this->size_ != that.size_)
+	for (size_t i = 0; i < that.size_; i++)
 	{
-		delete[] this->Indices;
-		delete[] this->Cities;
-	
-		this->size_ = that.size_;
-
-		// allocate
-		// std::cout << "resizing 1" << std::endl;
-		this->Indices = new int[this->size_];
-		this->Cities = new City[this->size_];
-	}
-	// std::copy(this->Cities, this->Cities + this->size_, that.Cities);
-	// std::copy(this->Indices, this->Indices + this->size_, that.Indices);
-	for(int i = 0; i < this->size_; i++)
-	{
-		this->Cities[i] = that.Cities[i];
 		this->Indices[i] = that.Indices[i];
+		this->Cities[i] = that.Cities[i];
 	}
-
+	
 }
 
-/// <summary>
-/// Move Constructor
-/// </summary>
-/// <param name="that"></param>
-/// <returns></returns>
 Contender::Contender(Contender&& that) noexcept
+	:	size_{that.size_},
+		fitness_{that.fitness_},
+		path_length_{that.path_length_},
+		Indices{that.Indices},
+		Cities{that.Cities}
 {
-	this->size_ = that.size_;
-	//std::cout << this->path_length_ << " : " << that.path_length_ << std::endl;
-
-	this->fitness_ = that.fitness_;
-	this->path_length_ = that.path_length_;
-	//std::cout << this->path_length_ << " : " << that.path_length_ << std::endl;
-
-	this->Indices = that.Indices;
-	this->Cities = that.Cities;
-
 	that.size_ = 0;
-	that.fitness_ = -1;
-	that.path_length_ = -1;
-	that.Cities = nullptr;
+	that.fitness_ = 0;
+	that.path_length_ = 0;
 	that.Indices = nullptr;
-	//std::cout << this->path_length_ << " : " << that.path_length_ << std::endl;
-	// std::cout << "moving\n";
+	that.Cities = nullptr;
 }
+
 
 /// <summary>
 /// Cleans up memory allocated on heap
 /// </summary>
 Contender::~Contender()
 {
-	// std::cout << "deleting" << std::endl;
-	// if(Cities != nullptr)
-	// {
-	// 	// std::cout << Cities[0].index << " " << Cities[size_-1].index << std::endl;
-	// 	double a = sizeof(Cities);
-	// 	double b = sizeof(City);
-	// 	double c = a/b;
-	// 	std::cout << a << " " << b << " " << c << std::endl;
-	// 	delete[] Cities;
-	// }
-	// else
-	// 	delete Cities;
-	// if(Indices != nullptr)
-	// 	delete[] Indices;
-	// else
-	// 	delete Indices;
-	delete[] Cities;
+	// std::cout << path_length_ << std::endl;
+
 	delete[] Indices;
+	delete[] Cities;
 }
 
 
@@ -181,6 +102,11 @@ bool Contender::operator<(const Contender& that)
 	return this->path_length_ < that.path_length_;
 }
 
+bool Contender::operator>(const Contender& that)
+{
+	return this->path_length_ > that.path_length_;
+}
+
 
 /// <summary>
 /// Copy Assignment
@@ -191,41 +117,62 @@ Contender& Contender::operator=(const Contender& that)
 {
 	if (this != &that)
 	{
-		// deallocate
-		if(this->size_ != that.size_)
-		{
-			// std::cout << this->size_ << "-" << that.size_ << std::endl;
-			delete[] this->Indices;
-			delete[] this->Cities;
-		
-			this->size_ = that.size_;
+		// const auto new_indices = new int[that.size_];
+		// const auto new_cities = new City[that.size_];
 
-			// allocate
-			this->Indices = new int[that.size_];
-			this->Cities = new City[that.size_];
-			// std::cout << "resizing 2" << std::endl;
+		delete[] this->Indices;
+		delete[] this->Cities;
 
-		}
-		// Populate
-		//memcpy(this->Indices, that.Indices, that.size_ * sizeof(*this->Indices));
-		// for (int i = 0; i < that.size_; i++)
-		// {
-		// 	this->Cities[i] = that.Cities[i];
-		// 	this->Indices[i] = that.Indices[i];
-		// }
-		// std::copy(this->Cities, this->Cities + this->size_, that.Cities);
-		// std::copy(this->Indices, this->Indices + this->size_, that.Indices);
-		for(int i = 0; i < this->size_; i++)
-			{
-				this->Cities[i] = that.Cities[i];
-				this->Indices[i] = that.Indices[i];
-			}
+		this->size_ = that.size_;
 		this->fitness_ = that.fitness_;
 		this->path_length_ = that.path_length_;
-	}
 
+		if (that.size_ > 0)
+		{
+			this->Indices = new int[that.size_];
+			this->Cities = new City[that.size_];
+
+			for (size_t i = 0; i < that.size_; i++)
+			{
+				this->Indices[i] = that.Indices[i];
+				this->Cities[i] = that.Cities[i];
+			}
+		}
+		else
+		{
+			this->Indices = nullptr;
+			this->Cities = nullptr;
+		}
+
+
+		
+
+	}
 	return *this;
 }
+
+Contender& Contender::operator=(Contender&& that)
+{
+	if (this != &that)
+	{
+		delete[] this->Indices;
+		delete[] this->Cities;
+		this->Indices = that.Indices;
+		this->Cities = that.Cities;
+
+		this->fitness_ = that.fitness_;
+		this->path_length_ = that.path_length_;
+		this->size_ = that.size_;
+
+		that.path_length_=0;
+		that.fitness_ = 0;
+		that.size_ = 0;
+		that.Indices = nullptr;
+		that.Cities = nullptr;
+	}
+	return *this;
+}
+
 
 // ################################################################################
 // Documentation Tools
@@ -302,10 +249,9 @@ void Contender::GenerateRandomRoute()
 /// </summary>
 void Contender::SwapMutation()
 {
-	// TODO: Mutation by swaping priority of 2 points 
 	// Swaps index/indices to prevent
 
-	std::uniform_int_distribution<int> dist(0, size_);
+	std::uniform_int_distribution<int> dist(0, size_-1);
 	int index1 = dist(rng_);
 	int index2 = index1;
 	while (index2 == index1)
@@ -316,6 +262,8 @@ void Contender::SwapMutation()
 	double temp = Cities[index1].priority;
 	Cities[index1].priority = Cities[index2].priority;
 	Cities[index2].priority = temp;
+	// Cities[index1] = City(Cities[index1].index, Cities[index2].priority);
+	// Cities[index2] = City(Cities[index2].index, temp);
 }
 
 /// <summary>
@@ -356,7 +304,7 @@ void Contender::Crossover(const Contender& ParentA, const Contender& ParentB, Co
 	int size_ = ParentA.size_;
 
 	// Generate crossover points
-	std::uniform_int_distribution<int> dist(0, size_);
+	std::uniform_int_distribution<int> dist(0, size_-1);
 	int cross_point_a = dist(rng_);
 	int cross_point_b = dist(rng_);
 
@@ -417,7 +365,7 @@ void Contender::Crossover2(const Contender& ParentA, const Contender& ParentB, C
 	int size_ = ParentA.size_;
 
 	// Generate crossover points
-	std::uniform_int_distribution<int> dist(0, size_);
+	std::uniform_int_distribution<int> dist(0, size_-1);
 	int cross_point_a = dist(rng_);
 	int cross_point_b = dist(rng_);
 
@@ -532,6 +480,12 @@ double Contender::GetPriority(const int& index) const
 void Contender::SetPriority(const int& index, const double& priority)
 {
 	Cities[Indices[index]].priority = priority;
+}
+
+// Resets count to 0 so the experiments can continue!!!!! Woo!!!!
+void Contender::ResetEvalCount()
+{
+	evaluations_ = 0;
 }
 
 // ################################################################################

@@ -12,10 +12,17 @@ add_library(
     optimizers
     GenOpt/Contender.h
     GenOpt/Contender.cpp
+    GenOpt/Candidate.h
+    GenOpt/Candidate.cpp
     GenOpt/DataLog.h
     GenOpt/DataLog.cpp
     GenOpt/Optimizers.h
     GenOpt/Optimizers.cpp
+    GenOpt/Point.h
+    GenOpt/Point.cpp
+    GenOpt/City.h
+    GenOpt/City.cpp
+
 )
 
 # include path for libaray

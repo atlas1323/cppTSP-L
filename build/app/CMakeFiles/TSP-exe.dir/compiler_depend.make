@@ -276,8 +276,14 @@ app/CMakeFiles/TSP-exe.dir/main.cpp.o: ../app/main.cpp \
   ../src/Assist/Benchmarks.h \
   ../src/GenOpt/DataLog.h \
   ../src/GenOpt/Contender.h \
+  ../src/GenOpt/City.h \
+  ../src/GenOpt/Point.h \
   ../src/GenOpt/Optimizers.h
 
+
+../src/GenOpt/Point.h:
+
+../src/GenOpt/City.h:
 
 ../src/GenOpt/DataLog.h:
 
