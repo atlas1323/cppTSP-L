@@ -130,29 +130,29 @@ sandbox-exe/fast:
 	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/build
 .PHONY : sandbox-exe/fast
 
-main.o: main.cpp.o
-.PHONY : main.o
+sandbox.o: sandbox.cpp.o
+.PHONY : sandbox.o
 
 # target to build an object file
-main.cpp.o:
-	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o
-.PHONY : main.cpp.o
+sandbox.cpp.o:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o
+.PHONY : sandbox.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+sandbox.i: sandbox.cpp.i
+.PHONY : sandbox.i
 
 # target to preprocess a source file
-main.cpp.i:
-	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.i
-.PHONY : main.cpp.i
+sandbox.cpp.i:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.i
+.PHONY : sandbox.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+sandbox.s: sandbox.cpp.s
+.PHONY : sandbox.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.s
-.PHONY : main.cpp.s
+sandbox.cpp.s:
+	cd /home/dingo1323/Code/cppTSP/build && $(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/sandbox-exe.dir/build.make sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.s
+.PHONY : sandbox.cpp.s
 
 # Help Target
 help:
@@ -163,9 +163,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... sandbox-exe"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... sandbox.o"
+	@echo "... sandbox.i"
+	@echo "... sandbox.s"
 .PHONY : help
 
 

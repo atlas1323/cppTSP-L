@@ -1,0 +1,7 @@
+./resources/datasets/circ200.txt
+./resources/debug_out/
+300000
+BGA4
+1000
+0.5
+12

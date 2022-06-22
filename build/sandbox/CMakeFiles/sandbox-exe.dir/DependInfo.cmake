@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/dingo1323/Code/cppTSP/sandbox/main.cpp" "sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o" "gcc" "sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o.d"
+  "/home/dingo1323/Code/cppTSP/sandbox/sandbox.cpp" "sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o" "gcc" "sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o.d"
   )
 
 # Targets to which this target links.

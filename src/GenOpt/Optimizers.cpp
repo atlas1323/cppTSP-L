@@ -1,4 +1,4 @@
-#include "Optimizers.h"
+#include <Optimizers.h>
 
 #include "Contender.h"
 #include "Candidate.h"
@@ -239,21 +239,13 @@ namespace Optimizers
 		for (int i = 0; i < pop_size; i++)
 			population.push_back(Contender());
 
-		// for (int i = 0; i < pop_size; i++)
-		// 	std::cout << population[i].GetPathLength() << " ";
-		// std::cout << std::endl;
-
-		std::cout << "sorting\n\n";
 
 		// Sort starting popultion by fitness and find best fitness
 		std::sort(population.begin(), population.end());
 		best_fitness = population[0].GetPathLength();
 		logger.LogEntry(population[0].LogString());
 
-		// for (int i = 0; i < pop_size; i++)
-		// 	std::cout << population[i].GetPathLength() << " ";
-		// std::cout << std::endl;
-		// TODO: Log Data
+	
 
 		// main evolution loop
 		while (Contender::GetEvalCount() < num_evals)
@@ -415,6 +407,337 @@ namespace Optimizers
 		Contender::ResetEvalCount();
 	}
 
+	void BasicGA5(int pop_size, int num_evals, double survival_rate, std::string dPath, std::string oPath)
+	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals) + " SR:" + std::to_string(survival_rate);
+		DataLog logger = DataLog(dPath, oPath, "GeneticAlg5", params);
+
+		// Delcare and define necessary variables
+		double best_fitness;
+		double sum_fitness;
+		int cutoff = (int)(survival_rate * pop_size);
+		std::cout << cutoff << std::endl;
+
+
+		// collect data
+		Contender::Points = logger.GetPoints();
+
+		// Generate starting population
+		std::vector<Contender> population;
+		for (int i = 0; i < pop_size; i++)
+			population.push_back(Contender());
+
+
+		// Sort starting popultion by fitness and find best fitness
+		std::sort(population.begin(), population.end());
+		best_fitness = population[0].GetPathLength();
+		logger.LogEntry(population[0].LogString());
+
+	
+
+		// main evolution loop
+		while (Contender::GetEvalCount() < num_evals)
+		{
+			bool print = false;
+
+			sum_fitness = 0.0f;
+			for (int i = 0; i < cutoff; i++)
+				sum_fitness += population[i].GetFitness();
+
+			// Generate Solutions: Select and REcombine
+			for (int i = cutoff; i < pop_size - 3; i += 2)
+			{
+				int ParentA = ProportionalSelection(population, sum_fitness);
+				int ParentB = ParentA;
+				while (ParentB == ParentA)
+					ParentB = ProportionalSelection(population, sum_fitness);
+
+				Contender::Crossover(population[ParentA], population[ParentB], population[i], population[i + 1]);
+			}
+
+			Contender temp = Contender(population[0]);
+			temp.ReverseMutation();
+			Contender::Crossover2(population[0], temp, population[pop_size - 1], population[pop_size-2]);
+			
+
+			//std::cout << "sorting" << std::endl;
+			// Rank
+			std::sort(population.begin(), population.end());
+
+			if (population[0].GetPathLength() < best_fitness) {
+				best_fitness = population[0].GetPathLength();
+
+				// LOG DATA
+				logger.LogEntry(population[0].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[0].GetPathLength() << std::endl;
+			}
+		}
+
+		std::cout << "\n\n\n################################################################################\n";
+
+
+		for (Contender member : population)
+		{
+			std::cout << member.GetPathLength() << " ";
+		}
+
+		// for (int i = 0; i < pop_size; i++)
+		// {
+		// 	std::cout << "\n" << i << "---" << population[i].GetPathLength() << "\n";
+		// 	std::cout << population[i].RouteString() << std::endl;
+		// }
+		std::cout << std::endl;
+
+		std::cout << "################################################################################\n\n\n";
+
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
+	}
+
+
+	void MutGA(int pop_size, int num_evals, double survival_rate, double pressure, std::string dPath, std::string oPath )
+	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals) + " SR:" + std::to_string(survival_rate) + " MP:" + std::to_string(pressure);
+		std::uniform_real_distribution<double> r_dist(0.0f, 100.0f);
+		DataLog logger = DataLog(dPath, oPath, "MutGA", params);
+
+		
+		// Delcare and define necessary variables
+		double best_fitness;
+		double sum_fitness;
+		int cutoff = (int)(survival_rate * pop_size);
+		std::cout << cutoff << std::endl;
+
+
+		// collect data
+		Contender::Points = logger.GetPoints();
+
+		std::vector<Contender> population;
+		for(int i = 0; i < pop_size; i++)
+			population.push_back(Contender());
+		
+		std::sort(population.begin(), population.end());
+		best_fitness = population[0].GetPathLength();
+		logger.LogEntry(population[0].LogString());
+
+		while (Contender::GetEvalCount() < num_evals)
+		{
+			sum_fitness = 0.0f;
+			sum_fitness = 0.0f;
+			for (int i = 0; i < cutoff; i++)
+				sum_fitness += population[i].GetFitness();
+
+			// Generate Solutions: Select and REcombine
+			for (int i = cutoff; i < pop_size - 1; i += 2)
+			{
+				int ParentA = ProportionalSelection(population, sum_fitness);
+				int ParentB = ParentA;
+				while (ParentB == ParentA)
+					ParentB = ProportionalSelection(population, sum_fitness);
+				Contender::Crossover(population[ParentA], population[ParentB], population[i], population[i + 1]);
+
+				if (r_dist(rng) < pressure)
+				{
+					population[i].SwapMutation();
+					population[i].CalcFitness();
+					population[i+1].SwapMutation();
+					population[i+1].CalcFitness();
+
+				}
+			}
+			std::sort(population.begin(), population.end());
+
+			if (population[0].GetPathLength() < best_fitness) {
+				best_fitness = population[0].GetPathLength();
+
+				// LOG DATA
+				logger.LogEntry(population[0].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[0].GetPathLength() << std::endl;
+			}
+		}
+		std::cout << "\n\n\n################################################################################";
+
+
+		for (Contender member : population)
+		{
+			std::cout << member.GetPathLength() << " ";
+		}
+
+		std::cout << "################################################################################\n\n\n";
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
+	}
+
+
+	void MutGA_VP(int pop_size, int num_evals, double survival_rate, double low_pressure, double high_pressure, int slack, std::string dPath, std::string oPath )
+	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals) + " SR:" + std::to_string(survival_rate) + " LMP:" + std::to_string(low_pressure)+ " HMP:" + std::to_string(high_pressure)+ " S:" + std::to_string(slack);
+		std::uniform_real_distribution<double> r_dist(0.0f, 100.0f);
+		DataLog logger = DataLog(dPath, oPath, "MutGAVP", params);
+		double tracker = 0;
+		double gens = 0;
+		
+		// Delcare and define necessary variables
+		double best_fitness;
+		double sum_fitness;
+		double pressure = low_pressure;
+		double counter = 0;
+		double diff = high_pressure-low_pressure;
+		int cutoff = (int)(survival_rate * pop_size);
+		std::cout << cutoff << std::endl;
+
+
+		// collect data
+		Contender::Points = logger.GetPoints();
+
+		std::vector<Contender> population;
+		for(int i = 0; i < pop_size; i++)
+			population.push_back(Contender());
+		
+		std::sort(population.begin(), population.end());
+		best_fitness = population[0].GetPathLength();
+		logger.LogEntry(population[0].LogString());
+
+		while (Contender::GetEvalCount() < num_evals)
+		{
+			gens++;
+			sum_fitness = 0.0f;
+			sum_fitness = 0.0f;
+			for (int i = 0; i < cutoff; i++)
+				sum_fitness += population[i].GetFitness();
+
+			if (counter < slack)
+				pressure = diff*counter/slack + low_pressure;
+			else
+				pressure = high_pressure;
+
+			// Generate Solutions: Select and REcombine
+			for (int i = cutoff; i < pop_size - 1; i += 2)
+			{
+				int ParentA = ProportionalSelection(population, sum_fitness);
+				int ParentB = ParentA;
+				while (ParentB == ParentA)
+					ParentB = ProportionalSelection(population, sum_fitness);
+				Contender::Crossover(population[ParentA], population[ParentB], population[i], population[i + 1]);
+
+				if (r_dist(rng) < pressure)
+				{
+					population[i].SwapMutation();
+					population[i].CalcFitness();
+					population[i+1].SwapMutation();
+					population[i+1].CalcFitness();
+				}
+			}
+			tracker += pressure;
+			std::sort(population.begin(), population.end());
+
+			if (population[0].GetPathLength() < best_fitness) {
+				best_fitness = population[0].GetPathLength();
+				counter = 0;
+
+				// LOG DATA
+				logger.LogEntry(population[0].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[0].GetPathLength() << std::endl;
+			}
+			else
+				counter++;
+		}
+		std::cout << "\n\n\n################################################################################";
+
+
+		for (Contender member : population)
+		{
+			std::cout << member.GetPathLength() << " ";
+		}
+
+		std::cout << "################################################################################\n\n\n";
+		std::cout << Contender::GetEvalCount() << std::endl;
+		double avg_pressure = tracker/gens;
+		std::cout << "Avg Pressure: " << avg_pressure << std::endl;
+		Contender::ResetEvalCount();
+	}
+
+
+	void VariablePressure(int pop_size, int num_evals, double l_bound, double h_bound, int slack, std::string dPath, std::string oPath )
+	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals) + " LB:" + std::to_string(l_bound)+ " HB:" + std::to_string(h_bound)+ " S:" + std::to_string(slack);
+		DataLog logger = DataLog(dPath, oPath, "VarP", params);
+		double tracker = 0;
+		double gens = 0;
+		
+		// Delcare and define necessary variables
+		double best_fitness;
+		double sum_fitness;
+		double survival_rate = l_bound;
+		double counter = 0;
+		double diff = h_bound-l_bound;
+		int cutoff = (int)(survival_rate * pop_size);
+		std::cout << cutoff << std::endl;
+
+
+		// collect data
+		Contender::Points = logger.GetPoints();
+
+		std::vector<Contender> population;
+		for(int i = 0; i < pop_size; i++)
+			population.push_back(Contender());
+		
+		std::sort(population.begin(), population.end());
+		best_fitness = population[0].GetPathLength();
+		logger.LogEntry(population[0].LogString());
+
+		while (Contender::GetEvalCount() < num_evals)
+		{
+			gens++;
+			sum_fitness = 0.0f;
+			sum_fitness = 0.0f;
+			for (int i = 0; i < cutoff; i++)
+				sum_fitness += population[i].GetFitness();
+
+			if (counter < slack)
+				survival_rate = diff*counter/slack + l_bound;
+			else
+				survival_rate = h_bound;
+
+			// Generate Solutions: Select and REcombine
+			for (int i = cutoff; i < pop_size - 1; i += 2)
+			{
+				int ParentA = ProportionalSelection(population, sum_fitness);
+				int ParentB = ParentA;
+				while (ParentB == ParentA)
+					ParentB = ProportionalSelection(population, sum_fitness);
+				Contender::Crossover(population[ParentA], population[ParentB], population[i], population[i + 1]);
+
+			}
+			tracker += survival_rate;
+			std::sort(population.begin(), population.end());
+
+			if (population[0].GetPathLength() < best_fitness) {
+				best_fitness = population[0].GetPathLength();
+				counter = 0;
+				survival_rate = l_bound;
+				// LOG DATA
+				logger.LogEntry(population[0].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[0].GetPathLength() << std::endl;
+			}
+			else
+				counter++;
+
+		}
+		std::cout << "\n\n\n################################################################################";
+
+
+		for (Contender member : population)
+		{
+			std::cout << member.GetPathLength() << " ";
+		}
+
+		std::cout << "################################################################################\n\n\n";
+		std::cout << Contender::GetEvalCount() << std::endl;
+		double avg_rate = tracker/gens;
+		std::cout << "Avg Rate: " << avg_rate << std::endl;
+		Contender::ResetEvalCount();
+	}
 
 	void RMHC(int pop_size, int num_evals, std::string dPath, std::string oPath)
 	{

@@ -266,6 +266,18 @@ void Contender::SwapMutation()
 	// Cities[index2] = City(Cities[index2].index, temp);
 }
 
+void Contender::ReverseMutation()
+{
+	std::reverse(Cities, Cities + size_);
+	for (int i = 0; i < size_; i++)
+	{
+		double p = 0.0f + i;
+		Cities[i].priority = p;
+	}
+	UpdateIndices();
+
+}
+
 /// <summary>
 /// Mutation for priority list to increment or decrement its value. Each locus has a 
 /// chance of mutation equal to the user define rate. It will then be incremented or decremented

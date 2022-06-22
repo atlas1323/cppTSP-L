@@ -125,14 +125,12 @@ src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o: \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/9/bits/basic_string.tcc \
- /home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.h \
+ /home/dingo1323/Code/cppTSP/src/GenOpt/Contender.h \
  /usr/include/c++/9/vector /usr/include/c++/9/bits/stl_construct.h \
  /usr/include/c++/9/bits/stl_uninitialized.h /usr/include/c++/9/utility \
  /usr/include/c++/9/bits/stl_relops.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /usr/include/c++/9/ctime \
- /home/dingo1323/Code/cppTSP/src/GenOpt/Contender.h \
  /usr/include/c++/9/random /usr/include/c++/9/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -179,7 +177,9 @@ src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o: \
  /usr/include/c++/9/bits/atomic_base.h \
  /usr/include/c++/9/bits/atomic_lockfree_defines.h \
  /usr/include/c++/9/backward/auto_ptr.h \
- /usr/include/c++/9/pstl/glue_memory_defs.h /usr/include/c++/9/algorithm \
+ /usr/include/c++/9/pstl/glue_memory_defs.h \
+ /home/dingo1323/Code/cppTSP/src/GenOpt/DataLog.h \
+ /usr/include/c++/9/ctime /usr/include/c++/9/algorithm \
  /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h \

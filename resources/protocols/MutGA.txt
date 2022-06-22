@@ -1,0 +1,7 @@
+./resources/datasets/circ200.txt
+./resources/debug_out/
+6000000
+MGA
+1000
+0.1
+25

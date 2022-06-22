@@ -69,28 +69,28 @@ include sandbox/CMakeFiles/sandbox-exe.dir/progress.make
 # Include the compile flags for this target's objects.
 include sandbox/CMakeFiles/sandbox-exe.dir/flags.make
 
-sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o: sandbox/CMakeFiles/sandbox-exe.dir/flags.make
-sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o: ../sandbox/main.cpp
-sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o: sandbox/CMakeFiles/sandbox-exe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o"
-	cd /home/dingo1323/Code/cppTSP/build/sandbox && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o -MF CMakeFiles/sandbox-exe.dir/main.cpp.o.d -o CMakeFiles/sandbox-exe.dir/main.cpp.o -c /home/dingo1323/Code/cppTSP/sandbox/main.cpp
+sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o: sandbox/CMakeFiles/sandbox-exe.dir/flags.make
+sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o: ../sandbox/sandbox.cpp
+sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o: sandbox/CMakeFiles/sandbox-exe.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingo1323/Code/cppTSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o"
+	cd /home/dingo1323/Code/cppTSP/build/sandbox && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o -MF CMakeFiles/sandbox-exe.dir/sandbox.cpp.o.d -o CMakeFiles/sandbox-exe.dir/sandbox.cpp.o -c /home/dingo1323/Code/cppTSP/sandbox/sandbox.cpp
 
-sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sandbox-exe.dir/main.cpp.i"
-	cd /home/dingo1323/Code/cppTSP/build/sandbox && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dingo1323/Code/cppTSP/sandbox/main.cpp > CMakeFiles/sandbox-exe.dir/main.cpp.i
+sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sandbox-exe.dir/sandbox.cpp.i"
+	cd /home/dingo1323/Code/cppTSP/build/sandbox && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dingo1323/Code/cppTSP/sandbox/sandbox.cpp > CMakeFiles/sandbox-exe.dir/sandbox.cpp.i
 
-sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sandbox-exe.dir/main.cpp.s"
-	cd /home/dingo1323/Code/cppTSP/build/sandbox && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingo1323/Code/cppTSP/sandbox/main.cpp -o CMakeFiles/sandbox-exe.dir/main.cpp.s
+sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sandbox-exe.dir/sandbox.cpp.s"
+	cd /home/dingo1323/Code/cppTSP/build/sandbox && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingo1323/Code/cppTSP/sandbox/sandbox.cpp -o CMakeFiles/sandbox-exe.dir/sandbox.cpp.s
 
 # Object files for target sandbox-exe
 sandbox__exe_OBJECTS = \
-"CMakeFiles/sandbox-exe.dir/main.cpp.o"
+"CMakeFiles/sandbox-exe.dir/sandbox.cpp.o"
 
 # External object files for target sandbox-exe
 sandbox__exe_EXTERNAL_OBJECTS =
 
-sandbox/sandbox-exe: sandbox/CMakeFiles/sandbox-exe.dir/main.cpp.o
+sandbox/sandbox-exe: sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o
 sandbox/sandbox-exe: sandbox/CMakeFiles/sandbox-exe.dir/build.make
 sandbox/sandbox-exe: src/libassist.a
 sandbox/sandbox-exe: src/liboptimizers.a

@@ -17,8 +17,7 @@ public:
 	int* Indices;
 	static std::vector<Point> Points;
 
-	
-	
+
 	// Constructors, destructors and associated tools
 	Contender();
 	Contender(const Contender& that);
@@ -41,6 +40,8 @@ public:
 	// Optomization tools
 	void GenerateRandomRoute();
 	void SwapMutation();
+	void ReverseMutation();
+
 	void PriorityMut(const double& rate);
 	static void Crossover(const Contender& ParentA, const Contender& ParentB, Contender& ChildA, Contender& ChildB);
 	static void Crossover2(const Contender& ParentA, const Contender& ParentB, Contender& ChildA, Contender& ChildB);

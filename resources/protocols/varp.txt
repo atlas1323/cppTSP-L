@@ -1,0 +1,8 @@
+./resources/datasets/circ200.txt
+./resources/debug_out/
+3000000
+VarP
+1000
+0.05
+0.45
+500

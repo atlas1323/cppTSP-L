@@ -1,0 +1,5 @@
+./resources/datasets/circ200.txt
+./resources/debug_out/
+25000
+RMHC
+100
