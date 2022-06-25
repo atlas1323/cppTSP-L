@@ -1,0 +1,6 @@
+./resources/datasets/tsp.txt
+./resources/debug_out/
+300000
+RMHC3
+100
+1

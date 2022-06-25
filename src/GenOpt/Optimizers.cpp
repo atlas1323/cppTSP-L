@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include <set>
 
 namespace Optimizers
 {
@@ -538,11 +539,88 @@ namespace Optimizers
 
 				if (r_dist(rng) < pressure)
 				{
-					population[i].SwapMutation();
-					population[i].CalcFitness();
-					population[i+1].SwapMutation();
-					population[i+1].CalcFitness();
+					// population[i].SwapMutation();
+					// population[i].CalcFitness();
+					// population[i+1].SwapMutation();
+					// population[i+1].CalcFitness();
+					population[i].PriorityMut(pressure);
+					population[i+1].PriorityMut(pressure);
+				}
+			}
+			std::sort(population.begin(), population.end());
 
+			if (population[0].GetPathLength() < best_fitness) {
+				best_fitness = population[0].GetPathLength();
+
+				// LOG DATA
+				logger.LogEntry(population[0].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[0].GetPathLength() << std::endl;
+			}
+		}
+		std::cout << "\n\n\n################################################################################";
+
+
+		for (Contender member : population)
+		{
+			std::cout << member.GetPathLength() << " ";
+		}
+
+		std::cout << "################################################################################\n\n\n";
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
+	}
+
+	void MutGA2(int pop_size, int num_evals, double survival_rate, double pressure, std::string dPath, std::string oPath )
+	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals) + " SR:" + std::to_string(survival_rate) + " MP:" + std::to_string(pressure);
+		std::uniform_real_distribution<double> r_dist(0.0f, 100.0f);
+		DataLog logger = DataLog(dPath, oPath, "MutGA", params);
+
+		
+		// Delcare and define necessary variables
+		double best_fitness;
+		double sum_fitness;
+		int cutoff = (int)(survival_rate * pop_size);
+		std::cout << cutoff << std::endl;
+
+
+		// collect data
+		Contender::Points = logger.GetPoints();
+
+		std::vector<Contender> population;
+		for(int i = 0; i < pop_size; i++)
+			population.push_back(Contender());
+		
+		std::sort(population.begin(), population.end());
+		best_fitness = population[0].GetPathLength();
+		logger.LogEntry(population[0].LogString());
+
+		while (Contender::GetEvalCount() < num_evals)
+		{
+			sum_fitness = 0.0f;
+			sum_fitness = 0.0f;
+			for (int i = 0; i < cutoff; i++)
+				sum_fitness += population[i].GetFitness();
+
+			// Generate Solutions: Select and REcombine
+			for (int i = cutoff; i < pop_size - 1; i += 2)
+			{
+				int ParentA = ProportionalSelection(population, sum_fitness);
+				int ParentB = ParentA;
+				while (ParentB == ParentA)
+					ParentB = ProportionalSelection(population, sum_fitness);
+				Contender::Crossover(population[ParentA], population[ParentB], population[i], population[i + 1]);
+
+				if (r_dist(rng) < pressure)
+				{
+					// population[i].SwapMutation();
+					// population[i].CalcFitness();
+					// population[i+1].SwapMutation();
+					// population[i+1].CalcFitness();
+					population[i].PriorityMut(pressure);
+					population[i].CalcFitness();
+					population[i+1].PriorityMut(pressure);
+					population[i+1].CalcFitness();
 				}
 			}
 			std::sort(population.begin(), population.end());
@@ -622,10 +700,15 @@ namespace Optimizers
 
 				if (r_dist(rng) < pressure)
 				{
-					population[i].SwapMutation();
+					// population[i].SwapMutation();
+					// population[i].CalcFitness();
+					// population[i+1].SwapMutation();
+					// population[i+1].CalcFitness();
+					population[i].PriorityMut(pressure);
 					population[i].CalcFitness();
-					population[i+1].SwapMutation();
+					population[i+1].PriorityMut(pressure);
 					population[i+1].CalcFitness();
+
 				}
 			}
 			tracker += pressure;
@@ -633,7 +716,8 @@ namespace Optimizers
 
 			if (population[0].GetPathLength() < best_fitness) {
 				best_fitness = population[0].GetPathLength();
-				counter = 0;
+				if(counter > 0)
+					counter--;
 
 				// LOG DATA
 				logger.LogEntry(population[0].LogString());
@@ -773,7 +857,7 @@ namespace Optimizers
 		// Begin optimization loop
 		while (Contender::GetEvalCount() < num_evals)
 		{
-			std::cout << Contender::GetEvalCount() << std::endl;
+			// std::cout << Contender::GetEvalCount() << std::endl;
 			for (int i = 0; i < pop_size; i++)
 			{
 				Contender temp = Contender(population[i]);
@@ -786,7 +870,138 @@ namespace Optimizers
 					{
 						best_fitness = i;
 						logger.LogEntry(population[best_fitness].LogString());
-						std::cout << Contender::GetEvalCount() << " ::: " << population[best_fitness].GetPathLength() << std::endl;
+						std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
+
+					}
+				}
+			}
+		}
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
+	}
+
+	void RMHC2(int pop_size, int num_evals, double mut_rate, std::string dPath, std::string oPath)
+	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals);
+		DataLog logger = DataLog(dPath, oPath, "RMHC2", params);
+
+		// std::cout << "Beggining trial" << std::endl;
+		// Define tracking variables
+		int best_fitness = 0;
+
+		std::cout << "Generating Population... " << std::endl;
+		// Generate population
+		Contender::Points = logger.GetPoints();
+		std::vector <Contender> population;
+
+		for (int i = 0; i < pop_size; i++)
+		{
+			population.push_back(Contender());
+			if (population[i] < population[best_fitness] || i == best_fitness)
+			{
+
+				best_fitness = i;
+				logger.LogEntry(population[best_fitness].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
+			}
+		}
+
+		// logger.LogEntry(population[best_fitness].LogString());
+		// std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
+
+		std::cout << "starting opt loop" << std::endl;
+		// Begin optimization loop
+		while (Contender::GetEvalCount() < num_evals)
+		{
+			// std::cout << Contender::GetEvalCount() << std::endl;
+			for (int i = 0; i < pop_size; i++)
+			{
+				Contender temp = Contender(population[i]);
+				temp.PriorityMut(mut_rate);
+				temp.CalcFitness();
+				if (temp < population[i])
+				{
+					population[i] = temp;
+					if (population[i] < population[best_fitness] || i == best_fitness)
+					{
+						best_fitness = i;
+						logger.LogEntry(population[best_fitness].LogString());
+						std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
+
+					}
+				}
+			}
+			
+		}
+		std::cout << Contender::GetEvalCount() << std::endl;
+		Contender::ResetEvalCount();
+	}
+
+	void RMHC3(int pop_size, int num_evals, int mut_count, std::string dPath, std::string oPath)
+	{
+		std::string params = "P:" + std::to_string(pop_size) + " E:" + std::to_string(num_evals);
+		DataLog logger = DataLog(dPath, oPath, "RMHC3", params);
+
+		std::cout << "Beggining trial" << std::endl;
+		// Define tracking variables
+		int best_fitness = 0;
+
+		std::cout << "Generating Population... " << std::endl;
+		// Generate population
+		Contender::Points = logger.GetPoints();
+		std::vector <Contender> population;
+
+		std::uniform_int_distribution<int> r_dist(0, Contender::Points.size()-1);
+		std::uniform_int_distribution<int> toss(0, 1);
+		
+
+		for (int i = 0; i < pop_size; i++)
+		{
+			population.push_back(Contender());
+			if (population[i] < population[best_fitness] || i == best_fitness)
+			{
+
+				best_fitness = i;
+				logger.LogEntry(population[best_fitness].LogString());
+				std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
+			}
+		}
+		
+
+		// logger.LogEntry(population[best_fitness].LogString());
+		// std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
+
+		std::cout << "starting opt loop" << std::endl;
+		// Begin optimization loop
+		while (Contender::GetEvalCount() < num_evals)
+		{
+			// std::cout << Contender::GetEvalCount() << std::endl;
+			for (int i = 0; i < pop_size; i++)
+			{
+				Contender temp = Contender(population[i]);
+				std::set<int> mut_points;
+				while(mut_points.size() < mut_count)
+				{
+					mut_points.insert(r_dist(rng));
+				}
+				std::set<int>::iterator itr;
+				for(itr = mut_points.begin(); itr != mut_points.end(); itr++)
+				{
+					if(toss(rng))
+						temp.Cities[*itr].priority += 3;
+					else
+						temp.Cities[*itr].priority -= 3;
+				}
+
+				temp.CalcFitness();
+				if (temp < population[i])
+				{
+					population[i] = temp;
+					if (population[i] < population[best_fitness] || i == best_fitness)
+					{
+						best_fitness = i;
+						logger.LogEntry(population[best_fitness].LogString());
+						std::cout << Contender::GetEvalCount() << " : " << population[best_fitness].GetPathLength() << std::endl;
 
 					}
 				}

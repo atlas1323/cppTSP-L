@@ -1,9 +1,9 @@
-./resources/datasets/circ200.txt
+./resources/datasets/tsp.txt
 ./resources/debug_out/
 3000000
 MGAVP
 1000
 0.1
-0
-0
+0.5
+5
 50

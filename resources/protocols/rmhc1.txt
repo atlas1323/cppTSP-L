@@ -1,5 +1,5 @@
-./resources/datasets/circ200.txt
+./resources/datasets/tsp.txt
 ./resources/debug_out/
-25000
+300000
 RMHC
 100

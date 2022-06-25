@@ -293,9 +293,9 @@ void Contender::PriorityMut(const double& rate)
 		{
 			int p = GetPriority(i);
 			if (dist(rng_) < 50.0f)
-				p++;
+				p+=2;
 			else
-				p--;
+				p-=2;
 			SetPriority(i, p);
 		}
 	}

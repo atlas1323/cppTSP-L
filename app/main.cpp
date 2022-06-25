@@ -65,6 +65,50 @@ int main(int argc, char *argv[])
         Optimizers::RMHC(pop_size, num_evals, dPath, oPath);
 
     }
+    else if (method == "RMHC2")
+    {
+        std::cout << "RMHC2 selected...\n";
+
+        int pop_size;
+        std::cout << "Population size:\n";
+        std::cin >> pop_size;
+        std::cin.ignore(1,'\n');
+
+        double mut_rate;
+        std::cout << "Mutation count:\n";
+        std::cin >> mut_rate;
+        std::cin.ignore(1,'\n');
+
+        std::cout << "Parameters##############################\n";
+        std::cout << "Pop size:  " << pop_size << std::endl;
+        std::cout << "Num Evals: " << num_evals << std::endl;
+        std::cout << "Mut Count: " << mut_rate << std::endl;
+
+        Optimizers::RMHC2(pop_size, num_evals, mut_rate, dPath, oPath);
+
+    }
+    else if (method == "RMHC3")
+    {
+        std::cout << "RMHC3 selected...\n";
+
+        int pop_size;
+        std::cout << "Population size:\n";
+        std::cin >> pop_size;
+        std::cin.ignore(1,'\n');
+
+        int mut_count;
+        std::cout << "Mutation count:\n";
+        std::cin >> mut_count;
+        std::cin.ignore(1,'\n');
+
+        std::cout << "Parameters##############################\n";
+        std::cout << "Pop size:  " << pop_size << std::endl;
+        std::cout << "Num Evals: " << num_evals << std::endl;
+        std::cout << "Mut Count: " << mut_count  << std::endl;
+
+        Optimizers::RMHC3(pop_size, num_evals, mut_count, dPath, oPath);
+
+    }
     else if (method == "BGA1")
     {
         std::cout << "BasicGA1 selected\n";

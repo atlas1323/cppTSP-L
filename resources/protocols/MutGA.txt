@@ -1,7 +1,7 @@
-./resources/datasets/circ200.txt
+./resources/datasets/tsp.txt
 ./resources/debug_out/
-6000000
+3000000
 MGA
 1000
 0.1
-25
+5

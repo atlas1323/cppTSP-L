@@ -158,4 +158,34 @@ function main()
     
 end
 
-main()
+# main()
+
+function EucDist(point_a::Point, point_b::Point)::Float64
+    dist = sqrt((point_a.x-point_b.x)^2 + (point_a.y-point_b.y)^2)
+    # println(dist)
+    return dist
+end
+
+function PathLength(points::Vector{Point})
+    length = 0.0
+
+    for i in 2:size(points,1)
+        length += EucDist(points[i], points[i-1])
+    end
+
+    println(length);
+
+end
+
+function side()
+
+    s_path = "../resources/datasets/circ200.txt"
+    println("here")
+    points = read_in_points(s_path)
+    # p_size = size(points, 1)
+    # path = collect(1:p_size)
+    PathLength(points)
+
+end
+
+side()
