@@ -77,7 +77,7 @@ mutable struct Cohort
     step_size::Int64
     data::Vector{DataPoint}
     n::Int64
-
+    
     Cohort() = new()
 end
 

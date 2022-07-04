@@ -102,17 +102,27 @@ bool Contender::operator<(const Contender& that)
 	return this->path_length_ < that.path_length_;
 }
 
+/**
+ * @brief Greather or equal to operator used for sorting
+ * 
+ * @param that : RHS contender to compare to
+ * @return true : LHS contender is larger than RHS contender
+ * @return false : LHS contender is smaller than RHS contender
+ */
 bool Contender::operator>(const Contender& that)
 {
 	return this->path_length_ > that.path_length_;
 }
 
 
-/// <summary>
-/// Copy Assignment
-/// </summary>
-/// <param name="that">Instance to copy</param>
-/// <returns></returns>
+
+
+/**
+ * @brief Copy Assignment
+ * 
+ * @param that Instance to copy
+ * @return Contender& 
+ */
 Contender& Contender::operator=(const Contender& that)
 {
 	if (this != &that)

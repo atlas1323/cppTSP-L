@@ -1,0 +1,25 @@
+# ninja log v5
+3	71	1656780228209678500	src/CMakeFiles/optimizers.dir/GenOpt/Point.cpp.o	d729689b3ebb4570
+3	613	1656780228749678500	src/CMakeFiles/optimizers.dir/GenOpt/City.cpp.o	f3f60147d8b48a6d
+1	727	1656780228849678500	src/CMakeFiles/assist.dir/Assist/Benchmarks.cpp.o	268d5f9463eb63c8
+4	727	1656780228859678500	sandbox/CMakeFiles/sandbox-exe.dir/sandbox.cpp.o	e70e77ca28ac973f
+727	735	1656780228869678500	src/libassist.a	6db03f896a49a7a7
+2	1408	1656780229549678500	src/CMakeFiles/optimizers.dir/GenOpt/DataLog.cpp.o	fef7987d2451b688
+1	1701	1656780229839678500	src/CMakeFiles/optimizers.dir/GenOpt/Contender.cpp.o	b2d9b929a364fd32
+2	1861	1656780229999678500	src/CMakeFiles/optimizers.dir/GenOpt/Candidate.cpp.o	b2d99f8730b8a22e
+3	2060	1656780230199678500	app/CMakeFiles/TSP-exe.dir/main.cpp.o	d39f385fc001747f
+2	2215	1656780230349678500	src/CMakeFiles/optimizers.dir/GenOpt/Optimizers.cpp.o	59e4a16ae1acdae4
+2215	2234	1656780230369678500	src/liboptimizers.a	3921fc24269e0532
+4	2302	1656780230439678500	tests/CMakeFiles/test-run.dir/test2.cpp.o	f261d971274d1006
+71	2392	1656780230529678500	tests/lib/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	fd3df01791b1656e
+2234	2421	1656780230559678500	sandbox/sandbox-exe	5fd99562a491bf8
+2234	2431	1656780230569678500	app/TSP-exe	28000cd90d79481
+4	2711	1656780230849678500	tests/CMakeFiles/test-run.dir/test1.cpp.o	35f5d7af6219ad26
+7	2746	1656780230879678500	tests/lib/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o	6ef38d42d04f4e20
+4	3671	1656780231809678500	tests/lib/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o	b51b6816af808ad0
+8	5351	1656780233489678500	tests/lib/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	f59be3d62529f3c1
+5351	5384	1656780233519678500	lib/libgtest.a	d5a374b76037d2ad
+5384	5389	1656780233529678500	lib/libgtest_main.a	2cdea7b066aec735
+5384	5402	1656780233539678500	lib/libgmock.a	6b16fbe64d990d66
+5402	5407	1656780233549678500	lib/libgmock_main.a	9ea787f047668816
+5390	5598	1656780233729678500	tests/test-run	4e2f2533dfda3770
